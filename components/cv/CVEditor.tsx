@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useLanguage } from '@/lib/contexts/LanguageContext';
-import { CVTemplateModern } from './CVTemplateModern';
-import { CVTemplateClassic } from './CVTemplateClassic';
-import { cvService } from '@/lib/services/cv.service';
+import { useState } from "react";
+import { useLanguage } from "@/lib/contexts/LanguageContext";
+import { CVTemplateModern } from "./CVTemplateModern";
+import { CVTemplateClassic } from "./CVTemplateClassic";
+import { cvService } from "@/lib/services/cv.service";
 
 interface CVEditorProps {
   cvData: any;
@@ -13,17 +13,26 @@ interface CVEditorProps {
 
 export function CVEditor({ cvData, onSave }: CVEditorProps) {
   const { t } = useLanguage();
-  const [template, setTemplate] = useState<'modern' | 'classic'>('modern');
+  const [template, setTemplate] = useState<"modern" | "classic">("modern");
   const [data, setData] = useState(cvData);
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExportPDF = async () => {
     setIsExporting(true);
     try {
-      await cvService.exportPDF('cv-content', `${data.personalInfo?.fullName || 'cv'}.pdf`);
+      console.log("Starting PDF export...", { data });
+      await cvService.exportPDF(
+        "cv-content",
+        `${data.personalInfo?.fullName || "cv"}.pdf`
+      );
+      console.log("PDF export completed");
     } catch (error) {
-      console.error('Error exporting PDF:', error);
-      alert(t.common.error);
+      console.error("Error exporting PDF:", error);
+      alert(
+        `${t.common.error}: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
     } finally {
       setIsExporting(false);
     }
@@ -32,9 +41,12 @@ export function CVEditor({ cvData, onSave }: CVEditorProps) {
   const handleExportDOCX = async () => {
     setIsExporting(true);
     try {
-      await cvService.exportDOCX(data, `${data.personalInfo?.fullName || 'cv'}.docx`);
+      await cvService.exportDOCX(
+        data,
+        `${data.personalInfo?.fullName || "cv"}.docx`
+      );
     } catch (error) {
-      console.error('Error exporting DOCX:', error);
+      console.error("Error exporting DOCX:", error);
       alert(t.common.error);
     } finally {
       setIsExporting(false);
@@ -43,9 +55,9 @@ export function CVEditor({ cvData, onSave }: CVEditorProps) {
 
   const handleExportJSON = () => {
     try {
-      cvService.exportJSON(data, `${data.personalInfo?.fullName || 'cv'}.json`);
+      cvService.exportJSON(data, `${data.personalInfo?.fullName || "cv"}.json`);
     } catch (error) {
-      console.error('Error exporting JSON:', error);
+      console.error("Error exporting JSON:", error);
       alert(t.common.error);
     }
   };
@@ -58,64 +70,62 @@ export function CVEditor({ cvData, onSave }: CVEditorProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-4 justify-between items-center bg-white p-4 rounded-lg border border-neutral-200">
-        <div className="flex gap-2">
-          <button
-            onClick={() => setTemplate('modern')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              template === 'modern'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            {t.cv.modernTemplate}
-          </button>
-          <button
-            onClick={() => setTemplate('classic')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              template === 'classic'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            {t.cv.classicTemplate}
-          </button>
-        </div>
-
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={handleExportPDF}
-            disabled={isExporting}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors disabled:opacity-50"
-          >
-            {t.cv.exportPdf}
-          </button>
-          <button
-            onClick={handleExportDOCX}
-            disabled={isExporting}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
-          >
-            {t.cv.exportDocx}
-          </button>
-          <button
-            onClick={handleExportJSON}
-            className="px-4 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
-          >
-            {t.cv.exportJson}
-          </button>
-          {onSave && (
-            <button
-              onClick={handleSave}
-              className="px-4 py-2 bg-black text-white rounded-lg font-medium hover:bg-neutral-800 transition-colors"
-            >
-              {t.common.save}
-            </button>
-          )}
-        </div>
+      <div className="flex gap-0 border-2 border-black divide-x-2 divide-black">
+        <button
+          onClick={() => setTemplate("modern")}
+          className={`flex-1 px-6 py-3 font-bold transition-colors ${
+            template === "modern"
+              ? "bg-black text-white"
+              : "bg-white text-black hover:bg-black/5"
+          }`}
+        >
+          {t.cv.modernTemplate}
+        </button>
+        <button
+          onClick={() => setTemplate("classic")}
+          className={`flex-1 px-6 py-3 font-bold transition-colors ${
+            template === "classic"
+              ? "bg-black text-white"
+              : "bg-white text-black hover:bg-black/5"
+          }`}
+        >
+          {t.cv.classicTemplate}
+        </button>
       </div>
 
-      <div className="bg-gray-50 p-8 rounded-lg">
-        {template === 'modern' ? (
+      <div className="space-y-0 border-2 border-black divide-y-2 divide-black">
+        <button
+          onClick={handleExportPDF}
+          disabled={isExporting}
+          className="w-full px-6 py-4 bg-white text-black font-bold text-left hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {t.cv.exportPdf}
+        </button>
+        <button
+          onClick={handleExportDOCX}
+          disabled={isExporting}
+          className="w-full px-6 py-4 bg-white text-black font-bold text-left hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {t.cv.exportDocx}
+        </button>
+        <button
+          onClick={handleExportJSON}
+          className="w-full px-6 py-4 bg-white text-black font-bold text-left hover:bg-black hover:text-white transition-colors"
+        >
+          {t.cv.exportJson}
+        </button>
+        {onSave && (
+          <button
+            onClick={handleSave}
+            className="w-full px-6 py-4 bg-black text-white font-bold text-left hover:bg-white hover:text-black transition-colors"
+          >
+            {t.common.save}
+          </button>
+        )}
+      </div>
+
+      <div className="bg-white p-8 border-2 border-black" id="cv-content">
+        {template === "modern" ? (
           <CVTemplateModern data={data} />
         ) : (
           <CVTemplateClassic data={data} />
@@ -124,4 +134,3 @@ export function CVEditor({ cvData, onSave }: CVEditorProps) {
     </div>
   );
 }
-

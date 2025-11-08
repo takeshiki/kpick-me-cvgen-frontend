@@ -94,8 +94,9 @@ export default function CVCreatePage() {
   const handleSave = async () => {
     try {
       const newCV = await cvService.create({
-        content: { body: cvData },
-        template: "modern",
+        title: cvData.personalInfo.fullName || "My CV",
+        data: cvData,
+        templateId: "modern",
       });
       alert(t.common.success || "CV created successfully!");
       router.push(`/cv/${newCV.id}`);
@@ -107,44 +108,44 @@ export default function CVCreatePage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-neutral-600">{t.common.loading}</p>
+          <div className="animate-spin h-12 w-12 border-2 border-black border-t-transparent mx-auto mb-4"></div>
+          <p className="text-black/70 font-medium">{t.common.loading}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      <nav className="bg-white border-b border-neutral-200">
+    <div className="min-h-screen bg-white">
+      <nav className="bg-white border-b-2 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => router.push("/dashboard")}
             >
-              <Logo className="h-7 w-auto" />
-              <span className="text-xl font-semibold">CVgen</span>
+              <Logo className="h-7 w-auto text-black" />
+              <span className="text-xl font-bold text-black">AdvancedCV</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <LanguageSwitcher />
               <button
                 onClick={() => router.push("/dashboard")}
-                className="text-sm text-neutral-600 hover:text-black transition-colors"
+                className="text-sm font-medium text-black hover:text-black transition-colors"
               >
                 {t.nav.dashboard}
               </button>
               <button
                 onClick={logout}
-                className="text-sm text-neutral-600 hover:text-black transition-colors"
+                className="text-sm font-medium text-black hover:text-black transition-colors"
               >
                 {t.nav.logout}
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+                className="px-6 py-2 bg-black text-white border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
               >
                 {t.common.save || "Save CV"}
               </button>
@@ -153,27 +154,23 @@ export default function CVCreatePage() {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-neutral-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8 pb-8 border-b-2 border-black/10">
+          <h1 className="text-4xl font-bold text-black tracking-tight">
             {t.cv.createNew}
           </h1>
-          <p className="text-neutral-600 mt-2">
+          <p className="text-black/70 mt-3 text-lg">
             Fill in your information to create a professional CV
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Side - Form */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border-2 border-black">
+          <div className="p-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
             <CVForm initialData={cvData} onDataChange={setCvData} />
           </div>
 
-          {/* Right Side - Preview */}
-          <div className="sticky top-8 h-fit">
-            <h3 className="text-xl font-bold text-neutral-900 mb-4">
-              Live Preview
-            </h3>
+          <div className="p-8 bg-black/[0.02]">
+            <h3 className="text-2xl font-bold text-black mb-6">Live Preview</h3>
             <CVEditor cvData={cvData} onSave={handleSave} />
           </div>
         </div>

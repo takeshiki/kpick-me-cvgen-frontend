@@ -1,50 +1,109 @@
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
-export async function generatePDFFromElement(elementId: string, filename: string = 'cv.pdf') {
-  const element = document.getElementById(elementId);
-  if (!element) {
-    throw new Error('Element not found');
-  }
+export async function generatePDFFromElement(
+  elementId: string,
+  filename: string = "cv.pdf"
+) {
+  try {
+    const element = document.getElementById(elementId);
+    if (!element) {
+      console.error(`Element with id '${elementId}' not found`);
+      throw new Error(`Element with id '${elementId}' not found`);
+    }
 
-  const canvas = await html2canvas(element, {
-    scale: 2,
-    useCORS: true,
-    logging: false,
-    backgroundColor: '#ffffff',
-  });
+    console.log("Starting PDF generation...", { elementId, element });
 
-  const imgData = canvas.toDataURL('image/png');
-  const pdf = new jsPDF({
-    orientation: 'portrait',
-    unit: 'mm',
-    format: 'a4',
-  });
+    // Clone the element to avoid modifying the original
+    const clonedElement = element.cloneNode(true) as HTMLElement;
+    clonedElement.style.position = "absolute";
+    clonedElement.style.left = "-9999px";
+    clonedElement.style.top = "0";
+    document.body.appendChild(clonedElement);
 
-  const imgWidth = 210;
-  const pageHeight = 297;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  let heightLeft = imgHeight;
-  let position = 0;
+    // Replace modern color functions with compatible ones
+    const allElements = clonedElement.querySelectorAll("*");
+    allElements.forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      const computedStyle = window.getComputedStyle(htmlEl);
 
-  pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-  heightLeft -= pageHeight;
+      // Force compute and set colors to RGB
+      if (computedStyle.color) {
+        htmlEl.style.color = computedStyle.color;
+      }
+      if (computedStyle.backgroundColor) {
+        htmlEl.style.backgroundColor = computedStyle.backgroundColor;
+      }
+      if (computedStyle.borderColor) {
+        htmlEl.style.borderColor = computedStyle.borderColor;
+      }
+    });
 
-  while (heightLeft >= 0) {
-    position = heightLeft - imgHeight;
-    pdf.addPage();
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    // Wait for fonts and styles to load
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    const canvas = await html2canvas(clonedElement, {
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: "#ffffff",
+      allowTaint: true,
+      foreignObjectRendering: false,
+      imageTimeout: 0,
+      removeContainer: true,
+    });
+
+    // Remove cloned element
+    document.body.removeChild(clonedElement);
+
+    console.log("Canvas created:", {
+      width: canvas.width,
+      height: canvas.height,
+    });
+
+    if (canvas.width === 0 || canvas.height === 0) {
+      throw new Error(
+        "Canvas dimensions are invalid. Element might be hidden or empty."
+      );
+    }
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
+
+    const imgWidth = 210;
+    const pageHeight = 297;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
     heightLeft -= pageHeight;
-  }
 
-  pdf.save(filename);
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    console.log("Saving PDF:", filename);
+    pdf.save(filename);
+    console.log("PDF saved successfully");
+  } catch (error) {
+    console.error("Error in generatePDFFromElement:", error);
+    throw error;
+  }
 }
 
-export function downloadJSON(data: any, filename: string = 'cv.json') {
+export function downloadJSON(data: any, filename: string = "cv.json") {
   const jsonStr = JSON.stringify(data, null, 2);
-  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const blob = new Blob([jsonStr], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
   document.body.appendChild(link);
@@ -53,14 +112,15 @@ export function downloadJSON(data: any, filename: string = 'cv.json') {
   URL.revokeObjectURL(url);
 }
 
-export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
-  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = await import('docx');
+export async function generateDOCX(cvData: any, filename: string = "cv.docx") {
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } =
+    await import("docx");
 
   const sections: any[] = [];
 
   sections.push(
     new Paragraph({
-      text: cvData.personalInfo?.fullName || 'Untitled CV',
+      text: cvData.personalInfo?.fullName || "Untitled CV",
       heading: HeadingLevel.HEADING_1,
       alignment: AlignmentType.CENTER,
     })
@@ -70,22 +130,23 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
     const contactInfo: string[] = [];
     if (cvData.personalInfo.email) contactInfo.push(cvData.personalInfo.email);
     if (cvData.personalInfo.phone) contactInfo.push(cvData.personalInfo.phone);
-    if (cvData.personalInfo.location) contactInfo.push(cvData.personalInfo.location);
+    if (cvData.personalInfo.location)
+      contactInfo.push(cvData.personalInfo.location);
 
     if (contactInfo.length > 0) {
       sections.push(
         new Paragraph({
-          text: contactInfo.join(' | '),
+          text: contactInfo.join(" | "),
           alignment: AlignmentType.CENTER,
         })
       );
     }
 
     if (cvData.personalInfo.summary) {
-      sections.push(new Paragraph({ text: '' }));
+      sections.push(new Paragraph({ text: "" }));
       sections.push(
         new Paragraph({
-          text: 'Summary',
+          text: "Summary",
           heading: HeadingLevel.HEADING_2,
         })
       );
@@ -98,10 +159,10 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
   }
 
   if (cvData.experience && cvData.experience.length > 0) {
-    sections.push(new Paragraph({ text: '' }));
+    sections.push(new Paragraph({ text: "" }));
     sections.push(
       new Paragraph({
-        text: 'Work Experience',
+        text: "Work Experience",
         heading: HeadingLevel.HEADING_2,
       })
     );
@@ -111,7 +172,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
         new Paragraph({
           children: [
             new TextRun({
-              text: exp.jobTitle || '',
+              text: exp.jobTitle || "",
               bold: true,
             }),
           ],
@@ -121,7 +182,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
         new Paragraph({
           children: [
             new TextRun({
-              text: exp.company || '',
+              text: exp.company || "",
               italics: true,
             }),
           ],
@@ -130,7 +191,9 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
       if (exp.startDate) {
         sections.push(
           new Paragraph({
-            text: `${exp.startDate} - ${exp.current ? 'Present' : exp.endDate || ''}`,
+            text: `${exp.startDate} - ${
+              exp.current ? "Present" : exp.endDate || ""
+            }`,
           })
         );
       }
@@ -141,14 +204,14 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
           })
         );
       }
-      sections.push(new Paragraph({ text: '' }));
+      sections.push(new Paragraph({ text: "" }));
     });
   }
 
   if (cvData.education && cvData.education.length > 0) {
     sections.push(
       new Paragraph({
-        text: 'Education',
+        text: "Education",
         heading: HeadingLevel.HEADING_2,
       })
     );
@@ -158,7 +221,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
         new Paragraph({
           children: [
             new TextRun({
-              text: edu.degree || '',
+              text: edu.degree || "",
               bold: true,
             }),
           ],
@@ -168,7 +231,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
         new Paragraph({
           children: [
             new TextRun({
-              text: edu.institution || '',
+              text: edu.institution || "",
               italics: true,
             }),
           ],
@@ -177,7 +240,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
       if (edu.startDate) {
         sections.push(
           new Paragraph({
-            text: `${edu.startDate} - ${edu.endDate || ''}`,
+            text: `${edu.startDate} - ${edu.endDate || ""}`,
           })
         );
       }
@@ -188,20 +251,23 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
           })
         );
       }
-      sections.push(new Paragraph({ text: '' }));
+      sections.push(new Paragraph({ text: "" }));
     });
   }
 
   if (cvData.skills && cvData.skills.length > 0) {
     sections.push(
       new Paragraph({
-        text: 'Skills',
+        text: "Skills",
         heading: HeadingLevel.HEADING_2,
       })
     );
     const skillsText = cvData.skills
-      .map((skill: any) => `${skill.name}${skill.proficiency ? ` (${skill.proficiency})` : ''}`)
-      .join(', ');
+      .map(
+        (skill: any) =>
+          `${skill.name}${skill.proficiency ? ` (${skill.proficiency})` : ""}`
+      )
+      .join(", ");
     sections.push(
       new Paragraph({
         text: skillsText,
@@ -210,16 +276,19 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
   }
 
   if (cvData.languages && cvData.languages.length > 0) {
-    sections.push(new Paragraph({ text: '' }));
+    sections.push(new Paragraph({ text: "" }));
     sections.push(
       new Paragraph({
-        text: 'Languages',
+        text: "Languages",
         heading: HeadingLevel.HEADING_2,
       })
     );
     const langsText = cvData.languages
-      .map((lang: any) => `${lang.name}${lang.proficiency ? ` (${lang.proficiency})` : ''}`)
-      .join(', ');
+      .map(
+        (lang: any) =>
+          `${lang.name}${lang.proficiency ? ` (${lang.proficiency})` : ""}`
+      )
+      .join(", ");
     sections.push(
       new Paragraph({
         text: langsText,
@@ -228,10 +297,10 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
   }
 
   if (cvData.projects && cvData.projects.length > 0) {
-    sections.push(new Paragraph({ text: '' }));
+    sections.push(new Paragraph({ text: "" }));
     sections.push(
       new Paragraph({
-        text: 'Projects',
+        text: "Projects",
         heading: HeadingLevel.HEADING_2,
       })
     );
@@ -241,7 +310,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
         new Paragraph({
           children: [
             new TextRun({
-              text: project.name || '',
+              text: project.name || "",
               bold: true,
             }),
           ],
@@ -261,7 +330,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
           })
         );
       }
-      sections.push(new Paragraph({ text: '' }));
+      sections.push(new Paragraph({ text: "" }));
     });
   }
 
@@ -276,7 +345,7 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
 
   const blob = await Packer.toBlob(doc);
   const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
   document.body.appendChild(link);
@@ -284,4 +353,3 @@ export async function generateDOCX(cvData: any, filename: string = 'cv.docx') {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
-

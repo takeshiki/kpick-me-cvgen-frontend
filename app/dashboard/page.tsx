@@ -10,7 +10,6 @@ import {
   PlusIcon,
   EditIcon,
   TrashIcon,
-  DownloadIcon,
 } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/logo";
 import { useAuth } from "@/lib/hooks/useAuth";
@@ -95,34 +94,34 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      {/* Header */}
-      <nav className="bg-white border-b border-neutral-200">
+    <div className="min-h-screen bg-white">
+      <nav className="bg-white border-b-2 border-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <Logo className="h-7 w-auto" />
-              <span className="text-xl font-semibold">CVgen</span>
+              <Logo className="h-7 w-auto text-black" />
+              <span className="text-xl font-bold text-black">AdvancedCV</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <LanguageSwitcher />
               {user && (
                 <>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     {user.avatar && (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={user.avatar}
                         alt={user.name}
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8"
                       />
                     )}
-                    <span className="text-sm font-medium text-neutral-700">
+                    <span className="text-sm font-medium text-black">
                       {user.name}
                     </span>
                   </div>
                   <button
                     onClick={logout}
-                    className="text-sm text-neutral-600 hover:text-black transition-colors"
+                    className="text-sm font-medium text-black hover:text-black transition-colors"
                   >
                     {t.nav.logout}
                   </button>
@@ -132,19 +131,17 @@ export default function Dashboard() {
           </div>
         </div>
       </nav>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Sidebar */}
-          <div className="lg:w-64">
-            <div className="bg-white rounded-lg border border-neutral-200 p-4">
-              <nav className="space-y-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex flex-col lg:flex-row gap-0 border-2 border-black">
+          <div className="lg:w-64 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+            <div className="bg-white p-6">
+              <nav className="space-y-0 divide-y-2 divide-black/10">
                 <button
                   onClick={() => setActiveTab("dashboard")}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center space-x-3 px-4 py-4 text-sm font-medium transition-colors ${
                     activeTab === "dashboard"
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-neutral-600 hover:bg-neutral-100"
+                      ? "bg-black text-white"
+                      : "text-black hover:bg-black/5"
                   }`}
                 >
                   <LayoutDashboardIcon className="w-5 h-5" />
@@ -152,10 +149,10 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => setActiveTab("cvs")}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center space-x-3 px-4 py-4 text-sm font-medium transition-colors ${
                     activeTab === "cvs"
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-neutral-600 hover:bg-neutral-100"
+                      ? "bg-black text-white"
+                      : "text-black hover:bg-black/5"
                   }`}
                 >
                   <FileTextIcon className="w-5 h-5" />
@@ -163,10 +160,10 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => setActiveTab("interviews")}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center space-x-3 px-4 py-4 text-sm font-medium transition-colors ${
                     activeTab === "interviews"
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-neutral-600 hover:bg-neutral-100"
+                      ? "bg-black text-white"
+                      : "text-black hover:bg-black/5"
                   }`}
                 >
                   <VideoIcon className="w-5 h-5" />
@@ -174,10 +171,10 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => setActiveTab("training")}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center space-x-3 px-4 py-4 text-sm font-medium transition-colors ${
                     activeTab === "training"
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-neutral-600 hover:bg-neutral-100"
+                      ? "bg-black text-white"
+                      : "text-black hover:bg-black/5"
                   }`}
                 >
                   <SkillIcon className="w-5 h-5" />
@@ -186,85 +183,79 @@ export default function Dashboard() {
               </nav>
             </div>
           </div>
-
-          {/* Main Content */}
           <div className="flex-1">
             {activeTab === "dashboard" && (
-              <div className="space-y-6">
-                <h1 className="text-3xl font-bold text-neutral-900">
+              <div className="p-8 space-y-8">
+                <h1 className="text-4xl font-bold text-black tracking-tight">
                   {t.nav.dashboard}
                 </h1>
-
-                {/* Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <FileTextIcon className="w-5 h-5 text-blue-600" />
-                      <h3 className="text-sm font-medium text-neutral-600">
+                <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black/10 border-2 border-black">
+                  <div className="bg-white p-8">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <FileTextIcon className="w-6 h-6 text-black" />
+                      <h3 className="text-sm font-medium text-black/70">
                         {t.dashboard.totalCvs}
                       </h3>
                     </div>
-                    <p className="text-3xl font-bold text-neutral-900">
-                      {stats.cvs}
-                    </p>
+                    <p className="text-4xl font-bold text-black">{stats.cvs}</p>
                   </div>
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <VideoIcon className="w-5 h-5 text-purple-600" />
-                      <h3 className="text-sm font-medium text-neutral-600">
+                  <div className="bg-white p-8">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <VideoIcon className="w-6 h-6 text-black" />
+                      <h3 className="text-sm font-medium text-black/70">
                         {t.dashboard.totalInterviews}
                       </h3>
                     </div>
-                    <p className="text-3xl font-bold text-neutral-900">
+                    <p className="text-4xl font-bold text-black">
                       {stats.interviews}
                     </p>
                   </div>
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <SkillIcon className="w-5 h-5 text-green-600" />
-                      <h3 className="text-sm font-medium text-neutral-600">
+                  <div className="bg-white p-8">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <SkillIcon className="w-6 h-6 text-black" />
+                      <h3 className="text-sm font-medium text-black/70">
                         {t.dashboard.totalTraining}
                       </h3>
                     </div>
-                    <p className="text-3xl font-bold text-neutral-900">
+                    <p className="text-4xl font-bold text-black">
                       {stats.challenges}
                     </p>
                   </div>
                 </div>
 
                 {/* Recent Activity */}
-                <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                  <h2 className="text-xl font-semibold mb-4">
+                <div className="bg-white p-8 border-2 border-black">
+                  <h2 className="text-2xl font-bold text-black mb-6">
                     {t.dashboard.recentActivity}
                   </h2>
-                  <div className="space-y-3">
+                  <div className="space-y-0 divide-y-2 divide-black/10">
                     {progress.slice(0, 5).map((item) => (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between py-2 border-b border-neutral-100 last:border-0"
+                        className="flex items-center justify-between py-4"
                       >
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-4">
                           <div
-                            className={`w-2 h-2 rounded-full ${
+                            className={`w-3 h-3 ${
                               item.status === "completed"
-                                ? "bg-green-500"
-                                : "bg-yellow-500"
+                                ? "bg-black"
+                                : "bg-black/30"
                             }`}
                           ></div>
-                          <span className="text-sm text-neutral-700">
+                          <span className="text-sm font-medium text-black">
                             {item.status === "completed"
                               ? "Completed"
                               : "Attempted"}{" "}
                             challenge
                           </span>
                         </div>
-                        <span className="text-sm text-neutral-500">
+                        <span className="text-sm font-medium text-black">
                           Score: {item.score}
                         </span>
                       </div>
                     ))}
                     {progress.length === 0 && (
-                      <p className="text-sm text-neutral-500">
+                      <p className="text-sm text-black/70 py-4">
                         No recent activity
                       </p>
                     )}
@@ -274,43 +265,47 @@ export default function Dashboard() {
             )}
 
             {activeTab === "cvs" && (
-              <div className="space-y-6">
+              <div className="p-8 space-y-8">
                 <div className="flex justify-between items-center">
-                  <h1 className="text-3xl font-bold text-neutral-900">
+                  <h1 className="text-4xl font-bold text-black tracking-tight">
                     {t.cv.title}
                   </h1>
                   <button
                     onClick={() => router.push("/cv/create")}
-                    className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors"
+                    className="flex items-center space-x-2 bg-black text-white px-6 py-3 border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
                   >
                     <PlusIcon className="w-5 h-5" />
                     <span>{t.cv.createNew}</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {cvs.map((cv) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 divide-y-2 md:divide-y-0 border-2 border-black">
+                  {cvs.map((cv, index) => (
                     <div
                       key={cv.id}
-                      className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-lg transition-shadow"
+                      className={`bg-white p-6 ${
+                        index % 3 !== 2 ? "md:border-r-2 md:border-black" : ""
+                      }`}
                     >
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                      <h3 className="text-xl font-bold text-black mb-2">
                         {cv.title}
                       </h3>
-                      <p className="text-sm text-neutral-500 mb-4">
+                      <p className="text-sm text-black/70 mb-6">
                         Updated {new Date(cv.updatedAt).toLocaleDateString()}
                       </p>
-                      <div className="flex space-x-2">
+                      <div className="flex space-x-0 divide-x-2 divide-black border-2 border-black">
                         <button
                           onClick={() => router.push(`/cv/${cv.id}`)}
-                          className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
+                          className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 hover:bg-black hover:text-white transition-colors"
                         >
                           <EditIcon className="w-4 h-4" />
-                          <span className="text-sm">{t.common.edit}</span>
+                          <span className="text-sm font-medium">
+                            {t.common.edit}
+                          </span>
                         </button>
                         <button
                           onClick={() => handleDeleteCV(cv.id)}
-                          className="flex items-center justify-center px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                          className="flex items-center justify-center px-4 py-3 text-black hover:bg-black hover:text-white transition-colors"
                         >
                           <TrashIcon className="w-4 h-4" />
                         </button>
@@ -318,12 +313,12 @@ export default function Dashboard() {
                     </div>
                   ))}
                   {cvs.length === 0 && (
-                    <div className="col-span-full text-center py-12">
-                      <FileTextIcon className="w-12 h-12 text-neutral-300 mx-auto mb-4" />
-                      <p className="text-neutral-600 mb-4">{t.cv.title}</p>
+                    <div className="col-span-full text-center py-16 px-8">
+                      <FileTextIcon className="w-16 h-16 text-black mx-auto mb-6" />
+                      <p className="text-black/70 mb-6 text-lg">{t.cv.title}</p>
                       <button
                         onClick={() => router.push("/cv/create")}
-                        className="bg-black text-white px-6 py-2 rounded-lg hover:bg-neutral-800 transition-colors"
+                        className="bg-black text-white px-8 py-3 border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
                       >
                         {t.cv.createNew}
                       </button>
@@ -334,40 +329,40 @@ export default function Dashboard() {
             )}
 
             {activeTab === "interviews" && (
-              <div className="space-y-6">
+              <div className="p-8 space-y-8">
                 <div className="flex justify-between items-center">
-                  <h1 className="text-3xl font-bold text-neutral-900">
+                  <h1 className="text-4xl font-bold text-black tracking-tight">
                     {t.interviews.title}
                   </h1>
                   <button
                     onClick={() => router.push("/interviews/start")}
-                    className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors"
+                    className="flex items-center space-x-2 bg-black text-white px-6 py-3 border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
                   >
                     <PlusIcon className="w-5 h-5" />
                     <span>{t.interviews.startInterview}</span>
                   </button>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-0 divide-y-2 divide-black/10 border-2 border-black">
                   {interviews.map((interview) => (
                     <div
                       key={interview.id}
-                      className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-lg transition-shadow"
+                      className="bg-white p-8 hover:bg-black/5 transition-colors"
                     >
-                      <div className="flex justify-between items-start mb-4">
+                      <div className="flex justify-between items-start mb-6">
                         <div>
-                          <h3 className="text-lg font-semibold text-neutral-900">
+                          <h3 className="text-2xl font-bold text-black mb-2">
                             {interview.role}
                           </h3>
-                          <p className="text-sm text-neutral-500">
+                          <p className="text-sm text-black/70">
                             {new Date(interview.createdAt).toLocaleDateString()}
                           </p>
                         </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-blue-600">
+                        <div className="text-right border-2 border-black px-6 py-3">
+                          <div className="text-3xl font-bold text-black">
                             {interview.overallScore}%
                           </div>
-                          <p className="text-sm text-neutral-500">
+                          <p className="text-xs font-medium text-black/70 mt-1">
                             {t.interviews.score}
                           </p>
                         </div>
@@ -376,21 +371,21 @@ export default function Dashboard() {
                         onClick={() =>
                           router.push(`/interviews/${interview.id}`)
                         }
-                        className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                        className="text-sm text-black font-medium hover:text-black transition-colors"
                       >
                         View Details →
                       </button>
                     </div>
                   ))}
                   {interviews.length === 0 && (
-                    <div className="text-center py-12 bg-white rounded-lg border border-neutral-200">
-                      <VideoIcon className="w-12 h-12 text-neutral-300 mx-auto mb-4" />
-                      <p className="text-neutral-600 mb-4">
+                    <div className="text-center py-16 px-8 bg-white">
+                      <VideoIcon className="w-16 h-16 text-black mx-auto mb-6" />
+                      <p className="text-black/70 mb-6 text-lg">
                         {t.interviews.title}
                       </p>
                       <button
                         onClick={() => router.push("/interviews/start")}
-                        className="bg-black text-white px-6 py-2 rounded-lg hover:bg-neutral-800 transition-colors"
+                        className="bg-black text-white px-8 py-3 border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
                       >
                         {t.interviews.startInterview}
                       </button>
@@ -401,57 +396,57 @@ export default function Dashboard() {
             )}
 
             {activeTab === "training" && (
-              <div className="space-y-6">
+              <div className="p-8 space-y-8">
                 <div className="flex justify-between items-center">
-                  <h1 className="text-3xl font-bold text-neutral-900">
+                  <h1 className="text-4xl font-bold text-black tracking-tight">
                     {t.training.title}
                   </h1>
                   <button
                     onClick={() => router.push("/training")}
-                    className="bg-black text-white px-4 py-2 rounded-lg hover:bg-neutral-800 transition-colors"
+                    className="bg-black text-white px-6 py-3 border-2 border-black font-medium hover:bg-white hover:text-black transition-colors"
                   >
                     {t.training.startTraining}
                   </button>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                  <h2 className="text-xl font-semibold mb-4">
+                <div className="bg-white p-8 border-2 border-black">
+                  <h2 className="text-2xl font-bold text-black mb-6">
                     {t.dashboard.recentActivity}
                   </h2>
-                  <div className="space-y-3">
+                  <div className="space-y-0 divide-y-2 divide-black/10">
                     {progress.map((item) => (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between py-3 border-b border-neutral-100 last:border-0"
+                        className="flex items-center justify-between py-5"
                       >
                         <div>
-                          <p className="font-medium text-neutral-900">
+                          <p className="font-bold text-black text-lg">
                             Challenge {item.challengeId}
                           </p>
-                          <p className="text-sm text-neutral-500">
+                          <p className="text-sm text-black/70 mt-1">
                             {item.challengeType}
                           </p>
                         </div>
                         <div className="text-right">
                           <span
-                            className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                            className={`inline-block px-4 py-2 border-2 border-black text-xs font-bold ${
                               item.status === "completed"
-                                ? "bg-green-100 text-green-700"
+                                ? "bg-black text-white"
                                 : item.status === "failed"
-                                ? "bg-red-100 text-red-700"
-                                : "bg-yellow-100 text-yellow-700"
+                                ? "bg-white text-black"
+                                : "bg-black/10 text-black"
                             }`}
                           >
                             {item.status}
                           </span>
-                          <p className="text-sm text-neutral-500 mt-1">
+                          <p className="text-sm text-black font-medium mt-2">
                             Score: {item.score}
                           </p>
                         </div>
                       </div>
                     ))}
                     {progress.length === 0 && (
-                      <p className="text-sm text-neutral-500">
+                      <p className="text-sm text-black/70 py-4">
                         No progress yet
                       </p>
                     )}

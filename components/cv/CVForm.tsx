@@ -52,17 +52,16 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
   };
 
   return (
-    <div className="space-y-8 bg-white p-6 rounded-lg border border-neutral-200">
-      {/* Personal Info Section */}
+    <div className="space-y-8">
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-neutral-900 border-b pb-2">
+        <h2 className="text-2xl font-bold text-black pb-3 border-b-2 border-black/10">
           Personal Information
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
-              Full Name <span className="text-red-500">*</span>
+            <label className="block text-sm font-bold text-black mb-2">
+              Full Name <span className="text-black">*</span>
             </label>
             <input
               type="text"
@@ -70,14 +69,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "fullName"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="John Doe"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
-              Email <span className="text-red-500">*</span>
+            <label className="block text-sm font-bold text-black mb-2">
+              Email <span className="text-black">*</span>
             </label>
             <input
               type="email"
@@ -85,13 +84,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "email"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="john.doe@example.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               Phone
             </label>
             <input
@@ -100,13 +99,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "phone"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="+1 234 567 8900"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               Location
             </label>
             <input
@@ -115,7 +114,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "location"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="New York, USA"
             />
           </div>
@@ -123,7 +122,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               LinkedIn
             </label>
             <input
@@ -135,13 +134,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   e.target.value
                 )
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="https://linkedin.com/in/johndoe"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               GitHub
             </label>
             <input
@@ -150,13 +149,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "links", "github"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="https://github.com/johndoe"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               Portfolio
             </label>
             <input
@@ -168,13 +167,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   e.target.value
                 )
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="https://johndoe.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-bold text-black mb-2">
               Website
             </label>
             <input
@@ -183,38 +182,34 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               onChange={(e) =>
                 updateData(["personalInfo", "links", "website"], e.target.value)
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="https://example.com"
             />
           </div>
         </div>
       </section>
 
-      {/* Summary Section */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-neutral-900 border-b pb-2">
+        <h2 className="text-2xl font-bold text-black pb-3 border-b-2 border-black/10">
           Professional Summary
         </h2>
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
+          <label className="block text-sm font-bold text-black mb-2">
             Summary
           </label>
           <textarea
             value={formData.summary}
             onChange={(e) => updateData(["summary"], e.target.value)}
             rows={4}
-            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
             placeholder="A brief professional summary highlighting your key skills and experience..."
           />
         </div>
       </section>
 
-      {/* Experience Section */}
       <section className="space-y-4">
-        <div className="flex justify-between items-center border-b pb-2">
-          <h2 className="text-2xl font-bold text-neutral-900">
-            Work Experience
-          </h2>
+        <div className="flex justify-between items-center pb-3 border-b-2 border-black/10">
+          <h2 className="text-2xl font-bold text-black">Work Experience</h2>
           <button
             onClick={() =>
               addArrayItem(["experience"], {
@@ -226,7 +221,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                 current: false,
               })
             }
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="px-6 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors text-sm"
           >
             + Add Experience
           </button>
@@ -235,19 +230,19 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         {formData.experience.map((exp: any, index: number) => (
           <div
             key={index}
-            className="p-4 bg-neutral-50 rounded-lg space-y-3 relative"
+            className="p-6 bg-white border-2 border-black space-y-4 relative"
           >
             <button
               onClick={() => removeArrayItem(["experience"], index)}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold"
+              className="absolute top-4 right-4 text-black hover:text-black font-bold text-xl"
             >
               ✕
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Company <span className="text-red-500">*</span>
+                <label className="block text-sm font-bold text-black mb-2">
+                  Company <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -257,14 +252,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newExp[index].company = e.target.value;
                     updateData(["experience"], newExp);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Company Name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Position <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Position <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -274,13 +269,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newExp[index].position = e.target.value;
                     updateData(["experience"], newExp);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Job Title"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Location
                 </label>
                 <input
@@ -291,14 +286,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newExp[index].location = e.target.value;
                     updateData(["experience"], newExp);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="City, Country"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Start Date <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Start Date <span className="text-black">*</span>
                 </label>
                 <input
                   type="month"
@@ -308,12 +303,12 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newExp[index].startDate = e.target.value;
                     updateData(["experience"], newExp);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   End Date
                 </label>
                 <input
@@ -325,7 +320,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     updateData(["experience"], newExp);
                   }}
                   disabled={exp.current}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-neutral-100"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium disabled:bg-neutral-100"
                 />
               </div>
 
@@ -344,7 +339,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     }}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                   />
-                  <span className="text-sm font-medium text-neutral-700">
+                  <span className="text-sm font-bold text-black">
                     Current Position
                   </span>
                 </label>
@@ -354,10 +349,9 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         ))}
       </section>
 
-      {/* Education Section */}
       <section className="space-y-4">
         <div className="flex justify-between items-center border-b pb-2">
-          <h2 className="text-2xl font-bold text-neutral-900">Education</h2>
+          <h2 className="text-2xl font-bold text-black">Education</h2>
           <button
             onClick={() =>
               addArrayItem(["education"], {
@@ -369,7 +363,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                 description: "",
               })
             }
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors text-sm"
           >
             + Add Education
           </button>
@@ -378,19 +372,19 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         {formData.education.map((edu: any, index: number) => (
           <div
             key={index}
-            className="p-4 bg-neutral-50 rounded-lg space-y-3 relative"
+            className="p-6 bg-white border-2 border-black space-y-4 relative"
           >
             <button
               onClick={() => removeArrayItem(["education"], index)}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold"
+              className="absolute top-2 right-2 text-black hover:text-black text-xl font-bold"
             >
               ✕
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Institution <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Institution <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -400,14 +394,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newEdu[index].institution = e.target.value;
                     updateData(["education"], newEdu);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="University Name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Degree <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Degree <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -417,13 +411,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newEdu[index].degree = e.target.value;
                     updateData(["education"], newEdu);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Bachelor's, Master's, etc."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Field of Study
                 </label>
                 <input
@@ -434,14 +428,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newEdu[index].fieldOfStudy = e.target.value;
                     updateData(["education"], newEdu);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Computer Science, Business, etc."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Start Date <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Start Date <span className="text-black">*</span>
                 </label>
                 <input
                   type="month"
@@ -451,12 +445,12 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newEdu[index].startDate = e.target.value;
                     updateData(["education"], newEdu);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   End Date
                 </label>
                 <input
@@ -467,14 +461,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newEdu[index].endDate = e.target.value || null;
                     updateData(["education"], newEdu);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Leave empty if current"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
+              <label className="block text-sm font-medium text-black mb-2">
                 Description
               </label>
               <textarea
@@ -485,7 +479,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   updateData(["education"], newEdu);
                 }}
                 rows={2}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 placeholder="Notable achievements, coursework, GPA, etc."
               />
             </div>
@@ -493,15 +487,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         ))}
       </section>
 
-      {/* Skills Section */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-neutral-900 border-b pb-2">
+        <h2 className="text-2xl font-bold text-black pb-3 border-b-2 border-black/10">
           Skills
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-medium text-black mb-2">
               Technical Skills
             </label>
             <input
@@ -516,13 +509,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     .filter(Boolean)
                 )
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="JavaScript, Python, React (comma-separated)"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-medium text-black mb-2">
               Soft Skills
             </label>
             <input
@@ -537,13 +530,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     .filter(Boolean)
                 )
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="Leadership, Communication (comma-separated)"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">
+            <label className="block text-sm font-medium text-black mb-2">
               Tools & Technologies
             </label>
             <input
@@ -558,15 +551,15 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     .filter(Boolean)
                 )
               }
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
               placeholder="Git, Docker, VS Code (comma-separated)"
             />
           </div>
         </div>
 
         <div className="mt-4">
-          <div className="flex justify-between items-center mb-2">
-            <label className="block text-sm font-medium text-neutral-700">
+          <div className="flex justify-between items-center mb-3">
+            <label className="block text-sm font-bold text-black">
               Languages
             </label>
             <button
@@ -576,14 +569,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   level: "Intermediate",
                 })
               }
-              className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+              className="px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors text-sm"
             >
               + Add Language
             </button>
           </div>
 
           {formData.skills.languages.map((lang: any, index: number) => (
-            <div key={index} className="flex gap-2 mb-2">
+            <div key={index} className="flex gap-0 mb-2 border-2 border-black">
               <input
                 type="text"
                 value={lang.name}
@@ -592,7 +585,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   newLangs[index].name = e.target.value;
                   updateData(["skills", "languages"], newLangs);
                 }}
-                className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="flex-1 px-4 py-3 border-r-2 border-black focus:ring-0 focus:outline-none bg-white text-black font-medium"
                 placeholder="Language name"
               />
               <select
@@ -602,7 +595,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   newLangs[index].level = e.target.value;
                   updateData(["skills", "languages"], newLangs);
                 }}
-                className="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-3 border-r-2 border-black focus:ring-0 focus:outline-none bg-white text-black font-medium"
               >
                 <option value="Native">Native</option>
                 <option value="Fluent">Fluent</option>
@@ -612,7 +605,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
               </select>
               <button
                 onClick={() => removeArrayItem(["skills", "languages"], index)}
-                className="px-3 text-red-600 hover:text-red-800 font-bold"
+                className="px-4 text-black hover:bg-black hover:text-white text-xl font-bold transition-colors"
               >
                 ✕
               </button>
@@ -621,10 +614,9 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section className="space-y-4">
         <div className="flex justify-between items-center border-b pb-2">
-          <h2 className="text-2xl font-bold text-neutral-900">Projects</h2>
+          <h2 className="text-2xl font-bold text-black">Projects</h2>
           <button
             onClick={() =>
               addArrayItem(["projects"], {
@@ -637,7 +629,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                 endDate: null,
               })
             }
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors text-sm"
           >
             + Add Project
           </button>
@@ -646,19 +638,19 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         {formData.projects.map((project: any, index: number) => (
           <div
             key={index}
-            className="p-4 bg-neutral-50 rounded-lg space-y-3 relative"
+            className="p-6 bg-white border-2 border-black space-y-4 relative"
           >
             <button
               onClick={() => removeArrayItem(["projects"], index)}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold"
+              className="absolute top-2 right-2 text-black hover:text-black text-xl font-bold"
             >
               ✕
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Project Name <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Project Name <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -668,13 +660,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newProjects[index].name = e.target.value;
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Project Name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Technologies
                 </label>
                 <input
@@ -688,13 +680,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                       .filter(Boolean);
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="React, Node.js (comma-separated)"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Project Link
                 </label>
                 <input
@@ -705,13 +697,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newProjects[index].link = e.target.value;
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="https://example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   GitHub Repository
                 </label>
                 <input
@@ -722,13 +714,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newProjects[index].github = e.target.value;
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="https://github.com/user/repo"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Start Date
                 </label>
                 <input
@@ -739,12 +731,12 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newProjects[index].startDate = e.target.value;
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   End Date
                 </label>
                 <input
@@ -755,14 +747,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newProjects[index].endDate = e.target.value || null;
                     updateData(["projects"], newProjects);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                Description <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-black mb-2">
+                Description <span className="text-black">*</span>
               </label>
               <textarea
                 value={project.description}
@@ -772,7 +764,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   updateData(["projects"], newProjects);
                 }}
                 rows={3}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 placeholder="Describe the project and your role..."
               />
             </div>
@@ -780,12 +772,9 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         ))}
       </section>
 
-      {/* Certifications Section */}
       <section className="space-y-4">
         <div className="flex justify-between items-center border-b pb-2">
-          <h2 className="text-2xl font-bold text-neutral-900">
-            Certifications
-          </h2>
+          <h2 className="text-2xl font-bold text-black">Certifications</h2>
           <button
             onClick={() =>
               addArrayItem(["certifications"], {
@@ -797,7 +786,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                 credentialUrl: "",
               })
             }
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors text-sm"
           >
             + Add Certification
           </button>
@@ -806,19 +795,19 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         {formData.certifications.map((cert: any, index: number) => (
           <div
             key={index}
-            className="p-4 bg-neutral-50 rounded-lg space-y-3 relative"
+            className="p-6 bg-white border-2 border-black space-y-4 relative"
           >
             <button
               onClick={() => removeArrayItem(["certifications"], index)}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold"
+              className="absolute top-2 right-2 text-black hover:text-black text-xl font-bold"
             >
               ✕
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Certification Name <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Certification Name <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -828,14 +817,14 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].name = e.target.value;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="AWS Certified Developer"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  Issuer <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-black mb-2">
+                  Issuer <span className="text-black">*</span>
                 </label>
                 <input
                   type="text"
@@ -845,13 +834,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].issuer = e.target.value;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Amazon Web Services"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Issue Date
                 </label>
                 <input
@@ -862,12 +851,12 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].date = e.target.value;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Expiry Date
                 </label>
                 <input
@@ -878,13 +867,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].expiryDate = e.target.value || null;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="Leave empty if no expiry"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Credential ID
                 </label>
                 <input
@@ -895,13 +884,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].credentialId = e.target.value;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="ABC123XYZ"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                <label className="block text-sm font-medium text-black mb-2">
                   Credential URL
                 </label>
                 <input
@@ -912,7 +901,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                     newCerts[index].credentialUrl = e.target.value;
                     updateData(["certifications"], newCerts);
                   }}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
                   placeholder="https://verify.example.com/..."
                 />
               </div>
@@ -921,14 +910,13 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
         ))}
       </section>
 
-      {/* Extras Section */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-neutral-900 border-b pb-2">
+        <h2 className="text-2xl font-bold text-black pb-3 border-b-2 border-black/10">
           Additional Information
         </h2>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
+          <label className="block text-sm font-medium text-black mb-2">
             Interests & Hobbies
           </label>
           <input
@@ -943,7 +931,7 @@ export function CVForm({ initialData, onDataChange }: CVFormProps) {
                   .filter(Boolean)
               )
             }
-            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border-2 border-black focus:ring-0 focus:border-black bg-white text-black font-medium"
             placeholder="Photography, Hiking, Reading (comma-separated)"
           />
         </div>

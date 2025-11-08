@@ -8,14 +8,7 @@ import {
 export interface CV {
   id: string;
   title: string;
-  data: {
-    personalInfo: any;
-    experience: any[];
-    education: any[];
-    skills: any[];
-    languages: any[];
-    projects?: any[];
-  };
+  data: any; // Flexible data structure for CV content
   templateId?: string;
   template?: string;
   content?: any;
